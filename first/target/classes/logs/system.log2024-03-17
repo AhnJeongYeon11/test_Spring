@@ -1,0 +1,6 @@
+[15:21:57][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[15:21:58][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 748 ms
+[15:21:58][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[15:21:59][INFO ][FrameworkServlet.java: 547] - Completed initialization in 792 ms
+[15:22:08][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/btop3.do
+[17:44:46][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/btop3.do

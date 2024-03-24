@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+	<resultMap id="resultMember" type="Member">
+		<id property="userId" column="USERID" />
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="gender" column="GENDER" />
+		<result property="age" column="AGE" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="lastModified" column="LASTMODIFIED" />
+		<result property="signType" column="SIGNTYPE" />
+		<result property="adminYN" column="ADMIN_YN" />
+		<result property="loginOk" column="LOGIN_OK" />
+		<result property="photoFileName" column="PHOTO_FILENAME" />
+	</resultMap>
+	
+	<resultMap id="resultList" type="Member">
+		<result property="userId" column="USERID" />
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="gender" column="GENDER" />
+		<result property="age" column="AGE" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="lastModified" column="LASTMODIFIED" />
+		<result property="signType" column="SIGNTYPE" />
+		<result property="adminYN" column="ADMIN_YN" />
+		<result property="loginOk" column="LOGIN_OK" />
+		<result property="photoFileName" column="PHOTO_FILENAME" />
+	</resultMap>
+	
+	<!-- 로그인용 쿼리 -->
+	<select id="selectLogin" parameterType="Member" resultMap="resultMember">
+		select * from member 
+		where userid = #{ userId } and userpwd = #{ userPwd }
+		and login_ok = 'Y'
+	</select>
+	
+	<!-- 마이페이지 출력용 조회 쿼리 -->
+	<select id="selectMember" parameterType="string" resultMap="resultMember">
+		select * from member where userid = #{ uid } and login_ok = 'Y'
+	</select>
+	
+	<!-- 관리자용 회원 전체 조회용 쿼리 -->
+	<select id="selectList" resultMap="resultList">
+		select * from member where admin_yn = 'N'
+	</select>
+	
+	<!-- **************************************************************** -->
+	<!-- 목록 출력을 위한 페이징 처리와 관련된 쿼리 -->
+	<select id="selectListCount" resultType="_int">
+		select count(*) from member where admin_yn = 'N'
+	</select>
+	
+	<select id="selectListP" parameterType="Paging" resultMap="resultList">
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+		        from (select * from member where admin_yn = 'N'
+		              order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<!-- *************************************************** -->
+	<!-- 검색 목록 카운트 관련 -->
+	<select id="selectSearchUserIdCount" resultType="_int" parameterType="string">
+		select count(*) from member 
+		where admin_yn = 'N'
+		and userid like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="selectSearchGenderCount" resultType="_int" parameterType="string">
+		select count(*) from member 
+		where admin_yn = 'N'
+		and gender = #{ keyword } 
+	</select>
+	
+	<select id="selectSearchAgeCount" resultType="_int" parameterType="_int">
+		select count(*) from member 
+		where admin_yn = 'N'
+		<if test="age == 60">
+			<![CDATA[
+				and age >= #{ age }
+			]]>
+		</if>
+		<if test="age != 60">
+			and age between #{ age } and #{ age } + 9
+		</if>
+	</select>
+	
+	<select id="selectSearchEnrollDateCount" resultType="_int" parameterType="SearchDate">
+		select count(*) from member 
+		where admin_yn = 'N'
+		and enroll_date between #{ begin } and #{ end }
+	</select>
+	
+	<select id="selectSearchLoginOKCount" resultType="_int" parameterType="string">
+		select count(*) from member 
+		where admin_yn = 'N'
+		and login_ok = #{ keyword }
+	</select>
+	
+	
+	<!-- 관리자용 회원 목록 검색용 쿼리 시작 -->
+	<select id="selectSearchUserid" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+	         from (select * from member 
+	              where admin_yn = 'N' and userid like '%' || #{ keyword } || '%'
+	        	  order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchGender" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+	         from (select * from member where admin_yn = 'N' and gender = #{ keyword }
+	              order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<!--  
+	 	쿼리문에 비교연산자(>, <, <=, >=)를 그냥 사용하면
+	 	태그 앨리먼트 꺽쇠괄호와 혼돈하는 문제가 발생할 수 있음
+	 	이 문제를 방지하기 위해서 xml 코드 중 xml parser 에 의해 해석하지 말고,
+	 	문장 그대로 해석하라는 뜻으로
+	 	<![CDATA[ 쿼리문장 ]]>
+	-->	
+	<select id="selectSearchAge" parameterType="Search" resultMap="resultList">		
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+	         from (select * from member where admin_yn = 'N' 
+					<if test="keyword == 60">
+						<![CDATA[
+						and age >= #{ age }
+						 ]]>
+					</if>
+					<if test="keyword != 60">
+						and age between #{ age } and #{ age } + 9
+					</if>	
+				  order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }	
+	</select>
+	
+	<select id="selectSearchEnrollDate" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+	         from (select * from member 
+				  where admin_yn = 'N' and enroll_date between #{ begin } and #{ end }
+				  order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchLoginOK" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, USERID, USERPWD, USERNAME, GENDER, AGE, PHONE, 
+		              EMAIL, ENROLL_DATE, LASTMODIFIED, SIGNTYPE, ADMIN_YN, LOGIN_OK, 
+		              PHOTO_FILENAME
+	         from (select * from member where admin_yn = 'N' and login_ok = #{ keyword }
+	              order by enroll_date desc))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	<!-- 관리자용 회원 검색용 쿼리 끝 -->
+	
+	<!-- 회원가입시 아이디 중복 여부 검사용 쿼리 -->
+	<select id="selectCheckId" parameterType="string" resultType="_int">
+		select count(userid) from member where userid = #{ uid }
+	</select>
+	
+	<!-- dml -->
+	<!-- 회원 가입용 쿼리 -->
+	<insert id="insertMember" parameterType="Member">
+		insert into member 
+		values (#{ userId }, #{ userPwd }, #{ userName }, #{ gender }, #{ age }, #{ phone }, 
+		#{ email }, default, default, default, default, default, #{ photoFileName })
+	</insert>
+	
+	<!-- 회원정보 수정용 쿼리 -->
+	<update id="updateMember" parameterType="Member">
+		update member 
+		set age = #{ age }, phone = #{ phone }, email = #{ email }, 
+			userpwd = #{ userPwd },
+			photo_filename = #{ photoFileName }, lastmodified = default 
+		where userid = #{ userId }
+	</update>
+	
+	<!-- 관리자용 회원 로그인제한 처리용 쿼리 -->
+	<update id="updateLoginOK" parameterType="Member">
+		update member set login_ok = #{ loginOk } where userid = #{ userId }
+	</update>
+	
+	<!-- 회원 탈퇴 처리용 쿼리 -->
+	<delete id="deleteMember" parameterType="string">
+		delete from member where userid = #{ uid }
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+

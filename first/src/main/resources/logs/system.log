@@ -1,0 +1,79 @@
+[09:38:17][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[09:38:18][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 780 ms
+[09:38:18][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[09:38:18][INFO ][FrameworkServlet.java: 547] - Completed initialization in 733 ms
+[10:08:17][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[10:08:17][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 768 ms
+[10:08:17][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[10:08:18][INFO ][FrameworkServlet.java: 547] - Completed initialization in 747 ms
+[10:08:34][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[10:08:47][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[10:09:01][WARN ][DispatcherServlet.java: 1278] - No mapping for POST /first/breply.do
+[10:09:35][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:18:05][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[11:18:05][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 739 ms
+[11:18:05][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[11:18:06][INFO ][FrameworkServlet.java: 547] - Completed initialization in 743 ms
+[11:18:36][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[11:18:45][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:20:39][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[11:20:39][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 755 ms
+[11:20:39][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[11:20:40][INFO ][FrameworkServlet.java: 547] - Completed initialization in 758 ms
+[11:20:52][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:20:54][INFO ][BoardController.java: 81] - breply.do : Board [boardNum=0, boardWriter=user01, boardTitle=ddd, boardContent=dddd, boardOriginalFileName=null, boardRenameFileName=null, boardRef=12, boardReplyRef=0, boardLev=2, boardReplySeq=1, boardReadCount=0, boardDate=null]
+[11:27:31][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/bdelete.do
+[11:27:41][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:27:45][INFO ][BoardController.java: 81] - breply.do : Board [boardNum=0, boardWriter=user01, boardTitle=aa, boardContent=aaa, boardOriginalFileName=null, boardRenameFileName=null, boardRef=12, boardReplyRef=0, boardLev=2, boardReplySeq=1, boardReadCount=0, boardDate=null]
+[11:33:22][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/bupview.do
+[11:36:06][INFO ][MemberController.java: 95] - login.do : Member [userId=user02, userPwd=pass02, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[11:36:11][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:36:16][INFO ][BoardController.java: 81] - breply.do : Board [boardNum=0, boardWriter=user02, boardTitle=dd, boardContent=ddd, boardOriginalFileName=null, boardRenameFileName=null, boardRef=12, boardReplyRef=19, boardLev=3, boardReplySeq=1, boardReadCount=0, boardDate=null]
+[11:36:19][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[11:36:21][INFO ][BoardController.java: 81] - breply.do : Board [boardNum=0, boardWriter=user02, boardTitle=a, boardContent=aaaa, boardOriginalFileName=null, boardRenameFileName=null, boardRef=12, boardReplyRef=18, boardLev=3, boardReplySeq=1, boardReadCount=0, boardDate=null]
+[11:36:28][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/bupview.do
+[11:36:39][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/bdelete.do
+[11:36:50][WARN ][DispatcherServlet.java: 1278] - No mapping for GET /first/bdelete.do
+[12:57:13][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[12:57:14][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 748 ms
+[12:57:14][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[12:57:15][INFO ][FrameworkServlet.java: 547] - Completed initialization in 781 ms
+[12:57:25][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[12:58:42][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/bwform.do 요청
+[12:59:52][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/bwform.do 요청
+[13:01:25][INFO ][BoardController.java: 158] - binsert.do : Board [boardNum=0, boardWriter=user01, boardTitle=rrr, boardContent=rrrrr, boardOriginalFileName=null, boardRenameFileName=null, boardRef=0, boardReplyRef=0, boardLev=0, boardReplySeq=0, boardReadCount=0, boardDate=null]
+[13:01:25][INFO ][BoardController.java: 176] - 첨부 파일명 변경 확인 : SQL_Workshop04_240215.pdf, 20240322130125.pdf
+[15:43:19][INFO ][MemberController.java: 95] - login.do : Member [userId=user02, userPwd=pass02, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[15:43:23][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/bwform.do 요청
+[15:43:33][INFO ][BoardController.java: 158] - binsert.do : Board [boardNum=0, boardWriter=user02, boardTitle=aaaa, boardContent=aaaaaaa, boardOriginalFileName=null, boardRenameFileName=null, boardRef=0, boardReplyRef=0, boardLev=0, boardReplySeq=0, boardReadCount=0, boardDate=null]
+[15:43:33][INFO ][BoardController.java: 176] - 첨부 파일명 변경 확인 : 01_자바복습용_서술형_답안.pdf, 20240322154333.pdf
+[16:15:29][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[16:15:30][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 800 ms
+[16:15:30][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[16:15:31][INFO ][FrameworkServlet.java: 547] - Completed initialization in 778 ms
+[16:16:02][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[16:58:41][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[16:58:41][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 742 ms
+[16:58:41][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[16:58:42][INFO ][FrameworkServlet.java: 547] - Completed initialization in 762 ms
+[16:59:18][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[16:59:18][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 776 ms
+[16:59:18][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[16:59:19][INFO ][FrameworkServlet.java: 547] - Completed initialization in 797 ms
+[16:59:32][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=PASS01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[16:59:44][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[16:59:56][WARN ][DispatcherServlet.java: 1278] - No mapping for POST /first/boriginupdate.do
+[17:01:18][INFO ][LoginCheckIntercepter.java: 29] - 로그인 상태 : /first/breplyform.do 요청
+[17:01:29][INFO ][BoardController.java: 152] - breply.do : Board [boardNum=0, boardWriter=user01, boardTitle=23의 댓글1, boardContent=테스트 댓글1, boardOriginalFileName=null, boardRenameFileName=null, boardRef=23, boardReplyRef=0, boardLev=2, boardReplySeq=1, boardReadCount=0, boardDate=null]
+[17:01:54][INFO ][MemberController.java: 95] - login.do : Member [userId=user02, userPwd=pass02, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[17:02:29][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[17:04:28][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[17:04:28][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 748 ms
+[17:04:28][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[17:04:29][INFO ][FrameworkServlet.java: 547] - Completed initialization in 730 ms
+[17:49:07][INFO ][ContextLoader.java: 271] - Root WebApplicationContext: initialization started
+[17:49:08][INFO ][ContextLoader.java: 307] - Root WebApplicationContext initialized in 762 ms
+[17:49:08][INFO ][FrameworkServlet.java: 525] - Initializing Servlet 'appServlet'
+[17:49:09][INFO ][FrameworkServlet.java: 547] - Completed initialization in 743 ms
+[17:49:23][INFO ][MemberController.java: 95] - login.do : Member [userId=user01, userPwd=pass01, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]
+[17:50:19][INFO ][MemberController.java: 95] - login.do : Member [userId=user02, userPwd=pass02, userName=null, gender=null, age=0, phone=null, email=null, enrollDate=null, lastModified=null, signType=null, adminYN=null, loginOk=null, photoFileName=null]

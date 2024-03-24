@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+	<resultMap type="Board" id="resultList">
+		<result property="boardNum" column="BOARD_NUM" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardReadCount" column="BOARD_READCOUNT" />
+		<result property="boardWriter" column="BOARD_WRITER" />
+		<result property="boardContent" column="BOARD_CONTENT" />
+		<result property="boardOriginalFileName" column="BOARD_ORIGINAL_FILENAME" />
+		<result property="boardRenameFileName" column="BOARD_RENAME_FILENAME" />
+		<result property="boardRef" column="BOARD_REF" />
+		<result property="boardReplyRef" column="BOARD_REPLY_REF" />
+		<result property="boardLev" column="BOARD_LEV" />
+		<result property="boardReplySeq" column="BOARD_REPLY_SEQ" />
+		<result property="boardDate" column="BOARD_DATE" />		
+	</resultMap>
+	
+	<resultMap id="resultBoardTop3" type="Board">
+		<result property="boardNum" column="BOARD_NUM" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardReadCount" column="BOARD_READCOUNT" />
+	</resultMap>
+	
+	<!-- 
+		비교연산자를 쿼리문에 사용하면
+		태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음
+		이 문제를 방지하기 위해 xml 코드 중 xml parser 에 의해 해석하지 말고,
+		문장 그대로 해석하라는 뜻으로 <![CDATA[ 쿼리문장 ]]> 사용함
+	 -->
+	<select id="selectTop3" resultMap="resultBoardTop3">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, board_num, board_title, board_readcount 
+			 from (select * from board 
+				  where board_lev = 1 
+				  order by board_readcount desc)) 
+		where rnum <= 3
+		]]>
+	</select>
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*) from board
+	</select>
+	
+	<select id="selectList" parameterType="Paging" resultMap="resultList">
+		select *
+		from (select rownum rnum, board_num, board_writer, board_title, board_content, 
+		          board_original_filename, board_rename_filename, board_ref, board_reply_ref,
+		          board_lev, board_reply_seq, board_readcount, board_date
+		     from (select * from board
+		           order by board_ref desc, board_reply_ref desc,
+		                    board_lev asc, board_reply_seq asc))
+		where rnum between #{ startRow } and #{ endRow }  
+	</select>
+	
+	<select id="selectBoard" parameterType="_int" resultMap="resultList">
+		select * from board
+		where board_num = #{ boardNum }
+	</select>
+	
+	<!-- dml ************************************************** -->
+	<insert id="insertOriginBoard" parameterType="Board">
+		insert into board
+		values ((select max(board_num) + 1 from board), #{ boardWriter }, #{ boardTitle }, 
+				#{ boardContent }, #{ boardOriginalFileName }, #{ boardRenameFileName }, 
+				(select max(board_num) + 1 from board), null, default, default, default, default)
+	</insert>
+	
+	<update id="updateAddReadCount" parameterType="_int">
+		update board
+		set board_readcount = board_readcount + 1
+		where board_num = #{ boardNum }
+	</update>
+	
+	<update id = "updateReplySeq1" parameterType="Board">
+		update board
+		set board_reply_seq = board_reply_seq + 1
+		where board_ref = #{ boardRef }
+		and board_lev = #{ boardLev }
+	</update>
+	
+	<update id = "updateReplySeq2" parameterType="Board">
+		update board
+		set board_reply_seq = board_reply_seq + 1
+		where board_ref = #{ boardRef }
+		and board_lev = #{ boardLev }
+		and board_reply_ref = #{ boardReplyRef }
+	</update>
+	
+	<insert id="insertReply1" parameterType="Board">
+		insert into board
+		values ((select max(board_num) + 1 from board),
+				#{ boardWriter }, #{ boardTitle }, #{ boardContent },
+				null, null, 
+				#{ boardRef }, (select max(board_num) + 1 from board),
+				 #{ boardLev }, #{ boardReplySeq }, default, sysdate)
+	</insert>
+	
+	<insert id="insertReply2" parameterType="Board">
+		insert into board
+		values ((select max(board_num) + 1 from board),
+				#{ boardWriter }, #{ boardTitle }, #{ boardContent },
+				null, null, 
+				#{ boardRef }, #{ boardReplyRef },
+				 #{ boardLev }, #{ boardReplySeq }, default, sysdate)
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="Board">
+		delete from board
+		<if test="boardLev == 1">
+			where board_ref = #{ boardNum }
+		</if>
+		<if test="boardLev == 2">
+			where board_reply_ref = #{ boardNum }
+		</if>
+		<if test="boardLev == 3">
+			where board_num = #{ boardNum }
+		</if>
+				 
+	</delete>
+	
+	<update id="updateReply" parameterType="Board">
+		update board
+		set board_title = #{ boardTitle }, 
+			board_content = #{ boardContent }
+		where board_num = #{ boardNum }
+	</update>
+
+
+	<update id="updateOrigin" parameterType="Board">
+		update board
+		set board_title = #{ boardTitle }, 
+			board_content = #{ boardContent }
+		<if test="boardOriginalFileName != null">
+			, board_original_filename = #{ boardOriginalFileName }
+			, board_rename_filename = #{ boardRenameFileName }
+		</if>
+		
+		<if test="boardOriginalFileName == null">
+			, board_original_filename = null
+			, board_rename_filename = null
+		
+		</if>
+		where board_num = #{ boardNum }
+	</update>
+	
+</mapper>
+
+
+
+
+
+

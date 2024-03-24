@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+
+	<resultMap type="Notice" id="resultTop3">
+		<result property = "noticeNo" column="NOTICENO"/>
+		<result property = "noticeTitle" column="NOTICETITLE"/>
+		<result property = "noticeDate" column="NOTICEDATE"/>
+		
+	</resultMap>
+	
+
+	<select id="selectTop3" resultMap="resultTop3">
+	
+		SELECT * 
+		FROM (SELECT ROWNUM RNUM, NOTICENO, NOTICETITLE, NOTICEDATE 
+		FROM (SELECT * FROM NOTICE 
+		       WHERE IMPORTANCE = 'N' 
+		       ORDER BY NOTICEDATE DESC)) 
+		WHERE RNUM BETWEEN 1 AND 3
+	
+	</select>
+	
+</mapper>
